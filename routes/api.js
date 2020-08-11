@@ -12,10 +12,21 @@ router.post("/api/workouts", ({ body }, res) => {
   });
 
   router.get("/api/workout", (req, res) => {
-    Transaction.find({})
+    Workout.find({})
       .sort({ day: -1 })
-      .then(dbTransaction => {
-        res.json(dbTransaction);
+      .then(dbWorkout => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.status(400).json(err);
+      });
+  });
+
+  router.get("/api/workout", (req, res) => {
+    Workout.updateOne({})
+      .sort({ day: -1 })
+      .then(dbWorkout => {
+        res.json(dbWorkout);
       })
       .catch(err => {
         res.status(400).json(err);
